@@ -1,0 +1,292 @@
+.................................................................
+[ koan - ]
+
+fun foo(name: String, number: Int, toUpperCase: Boolean) =
+        (if (toUpperCase) name.uppercase() else name) + number
+
+fun useFoo() = listOf(
+        foo("a"),
+        foo("b", number = 1),
+        foo("c", toUpperCase = true),
+        foo(name = "d", number = 2, toUpperCase = true)
+)
+
+// no default arg neede however 
+// case study = provide all arguments fun recieves 
+// in this case no crash but if some not passed then null 
+// and crash
+fun foo2() = listOf(
+    foo("X", 1, true),
+    foo("X", 44, false),
+    foo("X", 23948, true)
+)
+
+
+
+.................................................................
+[ triple quoted strings]
+
+  const val question = "life, the universe, and everything"
+const val answer = 42
+/**
+ * You can edit, run, and share this code.
+ * play.kotlinlang.org
+ */
+fun main() {
+    // assignments and configurables
+    
+    
+    val arrStr1: List<String> = listOf("abccasds", "daddcbacba", "abana")
+    val arrStr2: MutableList<String?> = mutableListOf()
+    var str1 = "daddcbacba"
+    
+    val str1Out: List<String?> = str1.split("")
+    //val countStr1Out: Int = str1Out.count()
+    arrStr2.addAll(str1Out)
+    println(str1Out)
+    val str1Out2 = arrStr2.filterNotNull()
+    while (arrStr2.remove(null)){}
+    while (arrStr2.remove("")) {}
+    
+    val xxii = removeNulls(arrStr2)
+ 	println("$$$: $xxii")
+    println("CHECK dim1: $str1Out2")
+    //val lsStr1: List<String> = listOf(str1Out)
+    // make new mutable list and add ech char from str1
+    //val insights1: MutableList<String> = mutableListOf(str1.split(","))
+    
+    var pattern = "\\w{3,4}".toRegex()
+    val result = pattern.matchEntire(str1)
+    println(result)
+    val xStr = joinOptions(arrStr1)
+    println(xStr)
+}
+
+fun <T> removeNulls(ls: MutableList<T>) {
+    val itr = ls.iterator()
+    while (itr.hasNext())
+    {
+        val curr: T? = itr.next()
+        if (curr == null) {
+            itr.remove() // remove nulls
+        }
+    }
+}
+
+fun joinOptions(
+    options: Collection<String> 
+): String {
+    return options.joinToString(prefix = "[", postfix = "]")
+}
+  
+
+
+.................................................................
+[2/20/2022]
+
+
+fun main(args: Array<String>) {
+    
+    // assignments and configurables
+    
+    val arrStr1: List<String> = listOf("abccasds", "daddcbacba", "abana")
+    val arrStr2: MutableList<String?> = mutableListOf()
+    val arrStr3: MutableList<String?> = mutableListOf()
+    
+    var str1 = "daddcbacba"
+    val str2 = "abccadcb"
+    
+    
+    var rangeStart = 0
+    var rangeEnd = 0
+    
+    val regX = "\\[a-z]".toRegex()
+    val mixedStr = str2.split("")
+    	.filter { it.isNotBlank() }
+    
+    val iterateLsMixedStr = mixedStr.listIterator()
+    while (iterateLsMixedStr.hasNext()){
+        val xxStr = iterateLsMixedStr.next()
+        println("TEST: $xxStr")
+    }
+        
+    for (i in mixedStr.indices)
+    {
+        if (mixedStr.contains(mixedStr[i]))
+        {
+            println("II: $i")
+            val iterator = mixedStr.iterator()
+            for ((index, value) in iterator.withIndex()){
+                println("The element at $index is $value")
+            }
+        }
+        println(i)
+    }
+
+    val dMap = mixedStr.map { it.first() to it }.toMap()
+    println("Mapped values: $dMap")
+    val str1Out: List<String?> = str2.split("").filter { it.isNotBlank() }
+    arrStr2.addAll(str1Out)
+    println("Original string split to List: $str1Out")
+    
+
+    val xStr = joinOptions(arrStr1)
+    println(xStr)
+}
+
+fun inCount(ls: List<String?>): Int {
+    var c = 0
+    for (i in 0 until ls.size)
+    {
+       c++
+    }
+    return c
+}
+
+fun <T> removeNulls(ls: MutableList<T>) {
+    val itr = ls.iterator()
+    while (itr.hasNext())
+    {
+        val curr: T? = itr.next()
+        if (curr == null) {
+            itr.remove() // remove nulls
+        }
+    }
+}
+
+fun joinOptions(
+    options: Collection<String> 
+): String {
+    return options.joinToString(prefix = "[", postfix = "]")
+}
+
+
+.................................................................
+[]
+
+
+fun main(args: Array<String>) {
+    
+    // assignments and configurables
+    
+    val arrStr1: List<String> = listOf("abccasds", "daddcbacba", "abana")
+    val arrStr2: MutableList<String?> = mutableListOf()
+    val arrStr3: MutableList<String> = mutableListOf()
+    
+    var str1 = "daddcbacba"
+    val str2 = "abccadcb"
+    
+    
+    var rangeStart = 0
+    var rangeEnd = 0
+    
+    val regX = "\\[a-z]".toRegex()
+    val mixedStr = str2.split("")
+    	.filter { it.isNotBlank() }
+    for (i in mixedStr.indices)
+    {
+        arrStr3.add(mixedStr[i])
+    }
+    println("MUTABLE List STring 3: $arrStr3")
+      
+    for (i in arrStr3.indices)
+    {
+        // need to test if the list has more than 1
+        // occurence of the current index i
+        val pattern = arrStr3[i]
+        val i = Regex(pattern).findAll(str2)
+        	.map { it.range.first }
+            .toList()
+        	//ap { it.range.first }
+            //oList()
+        println("XXXXXXXXXX: $i")
+    }
+
+    val dMap = mixedStr.map { it.first() to it }.toMap()
+    println("Mapped values: $dMap")
+    val str1Out: List<String?> = str2.split("").filter { it.isNotBlank() }
+    arrStr2.addAll(str1Out)
+    println("Original string split to List: $str1Out")
+    
+
+    val xStr = joinOptions(arrStr1)
+    println(xStr)
+}
+
+fun inCount(ls: List<String?>): Int {
+    var c = 0
+    for (i in 0 until ls.size)
+    {
+       c++
+    }
+    return c
+}
+
+fun <T> removeNulls(ls: MutableList<T>) {
+    val itr = ls.iterator()
+    while (itr.hasNext())
+    {
+        val curr: T? = itr.next()
+        if (curr == null) {
+            itr.remove() // remove nulls
+        }
+    }
+}
+
+fun joinOptions(
+    options: Collection<String> 
+): String {
+    return options.joinToString(prefix = "[", postfix = "]")
+}
+
+
+.................................................................
+[ get substring, remove in 1 move, print number of moves left to remove the rest]
+
+fun main(args: Array<String>) {
+    
+    // assignments and configurables
+    
+    val arrStr1: List<String> = listOf("abccasds", "daddcbacba", "abana")
+    val arrStr2: MutableList<String?> = mutableListOf()
+    val arrStr3: MutableList<String> = mutableListOf()
+    
+    var str1 = "daddcbacba"
+    val str2 = "abccadcb"
+    
+    
+    var rangeStart = 0
+    var rangeEnd = 0
+    
+    val regX = "\\[a-z]".toRegex()
+    val mixedStr = str2.split("")
+    	.filter { it.isNotBlank() }
+    for (i in mixedStr.indices)
+    {
+        arrStr3.add(mixedStr[i])
+    }
+    println("MUTABLE List STring 3: $arrStr3")
+      
+    for (i in arrStr3.indices)
+    {
+        // need to test if the list has more than 1
+        // occurence of the current index i
+        val pattern = arrStr3[i]
+        val i = Regex(pattern).findAll(str2)
+        	.map { it.range.first }
+            .toList()
+        println("XXXXXXXXXX: $i")
+        rangeStart = i[0]
+    }
+    
+    println("RANGE START: $rangeStart")
+
+    val dMap = mixedStr.map { it.first() to it }.toMap()
+    println("Mapped values: $dMap")
+    val str1Out: List<String?> = str2.split("").filter { it.isNotBlank() }
+    arrStr2.addAll(str1Out)
+    println("Original string split to List: $str1Out")
+
+
+.................................................................
+[]
