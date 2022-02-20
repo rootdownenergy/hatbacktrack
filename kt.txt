@@ -290,3 +290,65 @@ fun main(args: Array<String>) {
 
 .................................................................
 []
+
+/**
+ * You can edit, run, and share this code.
+ * play.kotlinlang.org
+ */
+fun main() {
+// run 3 iteraions
+    // 5,1,2,34
+    // 45123
+    // 34512
+    // bring last int from last to first
+    // read 5 indexes
+    var counter: Int = 0
+    var arr: List<Int> = listOf(1,2,3,4,5)
+    var tmpArr: MutableList<Int> = mutableListOf()
+    var xx: Int = 0
+    // loop 3x
+    while (counter < 3) {
+        // loop through and reorder or pluck last
+        if (counter == 0)
+        {
+            val ii: Int = arr.last()
+            val arr4 = arr[3]
+            val arr3 = arr[2]
+            val arr2 = arr[1]
+            val arr1 = arr[0]
+          tmpArr.add(ii)
+            tmpArr.add(arr1)
+            tmpArr.add(arr2)
+            tmpArr.add(arr3)
+            tmpArr.add(arr4)
+           
+            println(tmpArr.toString())
+    }
+        else
+        {
+            // get last indice from associative structure
+            val ii: Int = tmpArr.last()
+            val arr4 = tmpArr[3]
+            val arr3 = tmpArr[2]
+            val arr2 = tmpArr[1]
+            val arr1 = tmpArr[0]
+            tmpArr.clear()
+            tmpArr.add(ii)
+            tmpArr.add(arr1)
+            tmpArr.add(arr2)
+            tmpArr.add(arr3)
+            tmpArr.add(arr4)
+           
+            println(tmpArr.toString())
+        }
+        counter++
+    }
+}
+
+
+.................................................................
+[]
+.................................................................
+[]
+.................................................................
+[]
