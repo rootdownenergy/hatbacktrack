@@ -347,8 +347,109 @@ fun main() {
 
 
 .................................................................
+[koan]
+
+	val m = "(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)"
+
+	fun getPattern() = """\d{2} $m \d{4}"""
+
+	fun main(args: Array<String>){
+		println("27 FEB 1985".matches(getPattern().toRegex()))
+	}
+	.................................................................
 []
+
+	(+) Explicitly check null
+	val l = if (b != null) b.length else -1
 .................................................................
 []
+
+
+fun main() {
+	
+    val b: String? = "Kotlin"
+	// more complex checks canbe made only if b is immutable
+	// which  (meaning it is a local variable that is not modified 
+	// between the check and its usage or it is a member val 
+	// that has a backing field and is not overridable)
+    if (b != null && b.length > 0) {
+        print("String of length ${b.length}")
+    } else {
+        print("Empty string")
+    }
+}
+.................................................................
+[]
+
+data class XGen(
+    val i0: Int = 0,
+    val i1: Int? = 1,
+)
+fun main(args: Array<String>) {
+    
+    // assignments and configurables
+    
+    val arrStr1: List<String> = listOf("abccasds", "daddcbacba", "abana")
+    val arrStr2: MutableList<String?> = mutableListOf()
+    val arrStr3: MutableList<String> = mutableListOf()
+    val arrStrData1: MutableList<XGen> = mutableListOf()
+    var rangeHolderLs: MutableList<List<Int>> = mutableListOf()
+    
+    
+    var str1 = "daddcbacba"
+    var str2 = "abccadcb"
+    
+    
+    var rangeStart = 0
+    var rangeEnd = 0
+    val arrLsRange1: ArrayList<String> = arrayListOf()
+    
+    val regX = "\\[a-z]".toRegex()
+    val mixedStr = str2.split("")
+    	.filter { it.isNotBlank() }
+    for (i in mixedStr.indices)
+    {
+        arrStr3.add(mixedStr[i])
+    }
+    println("MUTABLE List STring 3: $arrStr3")
+      
+    for (i in arrStr3.indices)
+    {
+        // need to test if the list has more than 1
+        // occurence of the current index i
+        val pattern = arrStr3[i]
+        val iX: MutableList<Int> = Regex(pattern).findAll(str2)
+        	.map { it.range.first }
+            .toMutableList()
+        println("XXXXXXXXXX: $iX")
+        rangeHolderLs.add(iX)
+		//for (index in 0 until iX.size){}
+        //val xin = XGen(i0 = iX[0], i1 = iX[1])
+       	//arrStrData1.add(xin)
+    }
+    
+    println("RANGE START: $rangeStart")
+
+    val dMap = mixedStr.map { it.first() to it }.toMap()
+    println("Mapped values: $dMap")
+    val str1Out: List<String?> = str2.split("").filter { it.isNotBlank() }
+    arrStr2.addAll(str1Out)
+    println("Original string split to List: $str1Out")
+    
+    // equality
+    var a: String = "XXiixxII"
+    var b: String = "zz"
+    println("String a: $a , string b: $b")
+    
+    val convertLs = rangeHolderLs.flatten()
+    val removeRangeStart: Int = convertLs.get(0)
+    val removeRangeEnd: Int = 1+convertLs.get(1)
+    val subStr1 = str2.subSequence(removeRangeStart,removeRangeEnd)
+    var sub2 = str2.removeRange(removeRangeStart,removeRangeEnd)
+    println("String after first patternized removal $sub2")
+    println("SUB STR TO REMOVE FIRST: $subStr1")
+    println("FLAT MAP RANGE index 1: ${removeRangeStart} index2: ${removeRangeEnd}")
+    println("RANGE HOLDER FIRST INDEX: ${rangeHolderLs.get(0)}")
+}
 .................................................................
 []
